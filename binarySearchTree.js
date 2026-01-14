@@ -12,3 +12,10 @@ class Tree{
         this.root = root
     }
 }
+
+
+function buildTree(array){
+    const arr = array.filter((item, index) => array.indexOf(item) === index);
+
+}
+
