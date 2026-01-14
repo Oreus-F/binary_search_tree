@@ -15,7 +15,7 @@ class Tree{
 
 
 function buildTree(array){
-    const arr = array.filter((item, index) => array.indexOf(item) === index);
+    array = array.filter((item, index) => array.indexOf(item) === index);
 
 }
 
