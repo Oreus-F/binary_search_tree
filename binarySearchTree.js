@@ -14,8 +14,13 @@ class Tree{
 }
 
 
+function removeDuplicate(array){
+    return array.filter((item, index) => array.indexOf(item) === index);
+}
+
+
 function buildTree(array){
-    array = array.filter((item, index) => array.indexOf(item) === index);
+    array = removeDuplicate(array);
 
 }
 
