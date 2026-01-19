@@ -121,4 +121,13 @@ function buildTree(array = randomArray(10,1,100)){
 }
 
 
+function insert(value){
+    //check si la valeur est plus petite ou plus grande
+    // peu importe le résultat check si la prochaine valeur est null 
+    // si elle est null on intégrera la valeur ici
+    // sinon check si la valeur est comprise entre la première et la seconde
+    // si oui do something
+    // sinon continue
+}
+
 buildTree()
