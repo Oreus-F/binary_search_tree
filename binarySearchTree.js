@@ -74,7 +74,7 @@ function randomArray(length, min, max){
 }
 
 
-function insertNode(array ,node, start = 0, end = array.length){
+function createBranches(array ,node, start = 0, end = array.length){
     const mid = Math.floor((start + end)/2);
     
     if(start < end){
@@ -90,8 +90,8 @@ function insertNode(array ,node, start = 0, end = array.length){
         }
 
         
-        insertNode(array, newNode, start, mid);
-        insertNode(array, newNode, mid+1, end)
+        createBranches(array, newNode, start, mid);
+        createBranches(array, newNode, mid+1, end)
     }
 
     return node
@@ -102,23 +102,23 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
         return;
     }
     if (node.right !== null) {
-        prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+        prettyPrint(node.right, `${prefix}${isLeft ? '|   ' : '    '}`, false);
     }
-    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
+    console.log(`${prefix}${isLeft ? '"--- ' : ',--- '}${node.value}`);
     if (node.left !== null) {
-        prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+        prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '|   '}`, true);
     }
 };
 
-function buildTree(array){
+function buildTree(array = randomArray(10,1,100)){
     array = removeDuplicate(array);
     array = mergeSort(array);
 
     const tree = new Tree();
-    const bsTree = insertNode(array, tree);
+    const bsTree = createBranches(array, tree);
 
     prettyPrint(bsTree.root)
 }
 
 
-buildTree(randomArray(10, 1, 100))
+buildTree()
