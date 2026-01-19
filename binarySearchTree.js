@@ -1,5 +1,5 @@
 class Node{
-    constructor(value){
+    constructor(value = null){
         this.value = value,
         this.left = null,
         this.right = null
@@ -8,7 +8,7 @@ class Node{
 
 
 class Tree{
-    constructor(root){
+    constructor(root = null){
         this.root = root
     }
 }
@@ -74,13 +74,51 @@ function randomArray(length, min, max){
 }
 
 
+function insertNode(array ,node, start = 0, end = array.length){
+    const mid = Math.floor((start + end)/2);
+    
+    if(start < end){
+
+        const newNode = new Node(array[mid]);
+
+        if(node.root === null){
+            node.root = newNode
+        } else if(newNode.value < node.value){
+            node.left = newNode;
+        } else {
+            node.right = newNode;
+        }
+
+        
+        insertNode(array, newNode, start, mid);
+        insertNode(array, newNode, mid+1, end)
+    }
+
+    return node
+}
+
+const prettyPrint = (node, prefix = '', isLeft = true) => {
+    if (node === null) {
+        return;
+    }
+    if (node.right !== null) {
+        prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+    }
+    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
+    if (node.left !== null) {
+        prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+    }
+};
+
 function buildTree(array){
     array = removeDuplicate(array);
-    array = mergeSort(array)
-    console.log(array)
+    array = mergeSort(array);
 
+    const tree = new Tree();
+    const bsTree = insertNode(array, tree);
+
+    prettyPrint(bsTree.root)
 }
 
 
 buildTree(randomArray(10, 1, 100))
-
