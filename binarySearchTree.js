@@ -11,6 +11,21 @@ class Tree{
     constructor(root = null){
         this.root = root
     }
+
+    insert(value, node = this.root){
+    //check si la valeur est plus petite ou plus grande
+    // peu importe le résultat check si la prochaine valeur est null 
+    // si elle est null on intégrera la valeur ici
+    // sinon check si la valeur est comprise entre la première et la seconde
+    // si oui do something
+    // sinon continue
+
+    let nextNode = value < node.value ? node.left : node.right
+    if(nextNode === null){
+        nextNode = new Node(value);
+        return}
+    prettyPrint(this.root)
+    }
 }
 
 
@@ -65,7 +80,7 @@ function merge(array, start, mid, end){
 
 function randomArray(length, min, max){
     const array = []
-    for(let x = 0; x <= length; x++){
+    for(let x = 0; x <= length - 1; x++){
         const numb = Math.floor(Math.random() * (max - min + 1)) + min;
         array.push(numb)
     }
@@ -118,16 +133,13 @@ function buildTree(array = randomArray(10,1,100)){
     const bsTree = createBranches(array, tree);
 
     prettyPrint(bsTree.root)
+
+
+    return bsTree
 }
 
 
-function insert(value){
-    //check si la valeur est plus petite ou plus grande
-    // peu importe le résultat check si la prochaine valeur est null 
-    // si elle est null on intégrera la valeur ici
-    // sinon check si la valeur est comprise entre la première et la seconde
-    // si oui do something
-    // sinon continue
-}
 
-buildTree()
+
+const tree = buildTree(randomArray(1,1,20));
+tree.insert(10)
