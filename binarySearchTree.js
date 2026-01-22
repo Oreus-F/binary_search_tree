@@ -125,19 +125,22 @@ function buildTree(array = randomArray(10,1,100)){
 }
 
 
-function insert(value, node = this.root){
-//check si la valeur est plus petite ou plus grande
-// peu importe le résultat check si la prochaine valeur est null 
-// si elle est null on intégrera la valeur ici
-// sinon check si la valeur est comprise entre la première et la seconde
-// si oui do something
-// sinon continue
-
-let nextNode = value < node.value ? node.left : node.right
-if(nextNode === null){
-    nextNode = new Node(value);
-    return}
-prettyPrint(this.root)
+function insert(value, node){
+    if(value < node.value){
+        if(node.left === null){
+            node.left = new Node(value);
+            return
+        }
+        const nextNode = node.left;
+        insert(value, nextNode)
+    } else {
+        if(node.right === null){
+            node.right = new Node(value);
+            return
+        }
+        const nextNode = node.right;
+        insert(value, nextNode)
+    }
 }
 
 
