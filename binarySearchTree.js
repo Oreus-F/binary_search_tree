@@ -144,5 +144,10 @@ function insert(value, node){
 }
 
 
+function deleteItem(value, node){
+
+}
+
+
 const tree = buildTree(randomArray(1,1,20));
 insert(10, tree.root)
