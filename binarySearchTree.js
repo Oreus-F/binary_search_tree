@@ -111,21 +111,20 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     }
 };
 
-function buildTree(array = randomArray(10,1,100)){
+function buildTree(array){
     array = removeDuplicate(array);
     array = mergeSort(array);
 
     const tree = new Tree();
     const bsTree = createBranches(array, tree);
 
-    prettyPrint(bsTree.root)
-
-
     return bsTree
 }
 
 
 function insert(value, node){
+    if (value === node.value) return
+
     if(value < node.value){
         if(node.left === null){
             node.left = new Node(value);
@@ -145,9 +144,37 @@ function insert(value, node){
 
 
 function deleteItem(value, node){
+    // no child = delete to null
+    // One child = connecter enfant au parent
+    // deux enfants = trouver la valeur la plus petite de l'arbe droite et échanger les nodes pour ensuite supprimer la valeur 
+
+    // pour mettre la node sur null il faut le modifier sur le parent 
+    
+    if(value < node.value){
+        const nextNode = node.left;
+        deleteItem(value, nextNode);
+    }
+
+    if(value > node.value){
+        const nextNode = node.right;
+        deleteItem(value, nextNode)
+    };
+
+    if(value === node.value){
+        let left = node.left;
+        let right = node.right;
+
+        if(left === null && right === null){
+            console.log(node)
+            node = null
+            return
+        }
+    }
 
 }
 
 
-const tree = buildTree(randomArray(1,1,20));
-insert(10, tree.root)
+const tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
+insert(5, tree.root);
+deleteItem(75, tree.root)
+prettyPrint(tree.root)
