@@ -143,7 +143,7 @@ function insert(value, node){
 }
 
 
-function deleteItem(value, node){
+function deleteItem(value, node, prevNode = null){
     // no child = delete to null
     // One child = connecter enfant au parent
     // deux enfants = trouver la valeur la plus petite de l'arbe droite et échanger les nodes pour ensuite supprimer la valeur 
@@ -152,12 +152,14 @@ function deleteItem(value, node){
     
     if(value < node.value){
         const nextNode = node.left;
-        deleteItem(value, nextNode);
+        prevNode = node
+        deleteItem(value, nextNode, prevNode);
     }
 
     if(value > node.value){
         const nextNode = node.right;
-        deleteItem(value, nextNode)
+        prevNode = node
+        deleteItem(value, nextNode, prevNode)
     };
 
     if(value === node.value){
@@ -165,16 +167,16 @@ function deleteItem(value, node){
         let right = node.right;
 
         if(left === null && right === null){
-            console.log(node)
             node = null
-            return
+            value < prevNode.value ? prevNode.left = node : prevNode.right = node
         }
     }
-
+    
+    return
 }
 
 
-const tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
+let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 insert(5, tree.root);
 deleteItem(75, tree.root)
 prettyPrint(tree.root)
