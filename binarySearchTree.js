@@ -151,13 +151,6 @@ function getSuccessor(curr){
 
 
 function deleteItem(value, node){
-    // no child = delete to null
-    // One child = connecter enfant au parent
-    // deux enfants = trouver la valeur la plus petite de l'arbe droite et échanger les nodes pour ensuite supprimer la valeur 
-
-    // pour mettre la node sur null il faut le modifier sur le parent
-    
-    
     if(node === null) return node
 
     if(value < node.value){
