@@ -143,40 +143,47 @@ function insert(value, node){
 }
 
 
-function deleteItem(value, node, prevNode = null){
+function getSuccessor(curr){
+    curr = curr.right;
+    while(curr.left !== null && curr !== null){
+        curr = curr.left
+    }
+    return curr
+}
+
+
+function deleteItem(value, node){
     // no child = delete to null
     // One child = connecter enfant au parent
     // deux enfants = trouver la valeur la plus petite de l'arbe droite et échanger les nodes pour ensuite supprimer la valeur 
 
-    // pour mettre la node sur null il faut le modifier sur le parent 
+    // pour mettre la node sur null il faut le modifier sur le parent
     
+    
+    if(node === null) return node
+
     if(value < node.value){
-        const nextNode = node.left;
-        prevNode = node
-        deleteItem(value, nextNode, prevNode);
+        node.left = deleteItem(value, node.left)
+    } else if(value > node.value){
+        node.right = deleteItem(value, node.right);
+    } else {
+        if(node.left === null) return node.right
+        if(node.right === null) return node.left
+
+        const succ = getSuccessor(node);
+        node.value = succ.value;
+        node.right = deleteItem(succ.value, node.right)
+
     }
 
-    if(value > node.value){
-        const nextNode = node.right;
-        prevNode = node
-        deleteItem(value, nextNode, prevNode)
-    };
 
-    if(value === node.value){
-        let left = node.left;
-        let right = node.right;
-
-        if(left === null && right === null){
-            node = null
-            value < prevNode.value ? prevNode.left = node : prevNode.right = node
-        }
-    }
-    
-    return
+    return node
 }
 
 
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 insert(5, tree.root);
-deleteItem(75, tree.root)
+
+prettyPrint(tree.root)
+deleteItem(12, tree.root)
 prettyPrint(tree.root)
