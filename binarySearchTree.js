@@ -127,19 +127,17 @@ function insert(value, node){
 
     if(value < node.value){
         if(node.left === null){
-            node.left = new Node(value);
-            return
+            return new Node(value);
         }
-        const nextNode = node.left;
-        insert(value, nextNode)
+        node.left = insert(value, node.left)
     } else {
         if(node.right === null){
-            node.right = new Node(value);
-            return
+            return new Node(value);
         }
-        const nextNode = node.right;
-        insert(value, nextNode)
+        node.right = insert(value, node.right)
     }
+
+    return node
 }
 
 
