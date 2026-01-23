@@ -172,9 +172,19 @@ function deleteItem(value, node){
 }
 
 
+function find(value, node){
+    if(node === null) {return null}
+    if(value > node.value) {return find(value, node.right)}
+    if(value < node.value) {return find(value, node.left)}
+    if(value === node.value) {return node}
+}
+
+
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 insert(5, tree.root);
 
 prettyPrint(tree.root)
-deleteItem(12, tree.root)
+deleteItem(12, tree.root);
+console.log(find(75, tree.root))
+console.log(find(121, tree.root))
 prettyPrint(tree.root)
