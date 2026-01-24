@@ -180,6 +180,13 @@ function find(value, node){
 }
 
 
+function levelOrderForEach(callback){
+    if(callback === undefined){
+        throw new Error('A callback is required')
+    }
+}
+
+
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 insert(5, tree.root);
 
@@ -187,4 +194,5 @@ prettyPrint(tree.root)
 deleteItem(12, tree.root);
 console.log(find(75, tree.root))
 console.log(find(121, tree.root))
+levelOrderForEach()
 prettyPrint(tree.root)
