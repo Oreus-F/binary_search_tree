@@ -185,9 +185,7 @@ function levelOrderForEach(callback, root = null, queue = [root]){
         throw new Error('A callback is required')
     }
 
-    if(root === null) {
-        throw new Error('A root is needed')
-    }
+    if(root === null) return
 
 
     /* Recursion version */
@@ -216,39 +214,16 @@ function levelOrderForEach(callback, root = null, queue = [root]){
 }
 
 
-function inOrderForEach(callback, root = null, queue = [root]){
+function inOrderForEach(callback, node = null){
     if(callback === undefined){
         throw new Error('A callback is required')
     }
 
-    if(root === null) {
-        throw new Error('A root is needed')
-    }
+    if(node === null) return
 
-
-    /* Recursion version */
-    // if(root.left) queue.push(root.left);
-    // if(root.right) queue.push(root.right);
-    
-    // callback(queue[0]);
-    // queue.shift();
-
-    // if(queue.length === 0) return
-    // levelOrderForEach(callback, queue[0], queue)
-
-
-    /* Iteration version */
-
-
-    while(queue.length > 0){
-        const node = queue[0];
-
-        if(node.left) queue.push(node.left);
-        if(node.right) queue.push(node.right);
-
-        callback(node)
-        queue.shift()
-    }
+    inOrderForEach(callback, node.left);
+    callback(node);
+    inOrderForEach(callback, node.right)
 }
 
 
@@ -256,4 +231,5 @@ let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 insert(5, tree.root);
 
 prettyPrint(tree.root)
-levelOrderForEach(console.log, tree.root);
+// levelOrderForEach(console.log, tree.root);
+inOrderForEach(console.log, tree.root)
