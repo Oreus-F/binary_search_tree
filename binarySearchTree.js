@@ -223,13 +223,36 @@ function inOrderForEach(callback, node = null){
 
     inOrderForEach(callback, node.left);
     callback(node);
-    inOrderForEach(callback, node.right)
+    inOrderForEach(callback, node.right);
 }
 
+
+function preOrderForEach(callback, node = null){
+    if(callback === undefined){
+        throw new Error('A callback is required')
+    }
+
+    if(node === null) return
+
+    callback(node.value);
+    preOrderForEach(callback, node.left);
+    preOrderForEach(callback, node.right);
+}
+
+
+function postOrderForEach(callback, node = null){
+    if(callback === undefined){
+        throw new Error('A callback is required')
+    }
+
+    if(node === null) return
+
+    postOrderForEach(callback, node.left);
+    postOrderForEach(callback, node.right);
+    callback(node.value);
+}
 
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 insert(5, tree.root);
 
 prettyPrint(tree.root)
-// levelOrderForEach(console.log, tree.root);
-inOrderForEach(console.log, tree.root)
