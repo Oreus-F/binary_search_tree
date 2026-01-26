@@ -252,6 +252,11 @@ function postOrderForEach(callback, node = null){
     callback(node.value);
 }
 
+
+function height(){
+    
+}
+
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 insert(5, tree.root);
 
