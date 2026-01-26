@@ -196,6 +196,7 @@ function levelOrderForEach(callback, root = null, queue = [root]){
     
     // callback(queue[0]);
     // queue.shift();
+
     // if(queue.length === 0) return
     // levelOrderForEach(callback, queue[0], queue)
 
@@ -212,11 +213,42 @@ function levelOrderForEach(callback, root = null, queue = [root]){
         callback(node)
         queue.shift()
     }
+}
 
 
+function inOrderForEach(callback, root = null, queue = [root]){
+    if(callback === undefined){
+        throw new Error('A callback is required')
+    }
 
+    if(root === null) {
+        throw new Error('A root is needed')
+    }
+
+
+    /* Recursion version */
+    // if(root.left) queue.push(root.left);
+    // if(root.right) queue.push(root.right);
     
+    // callback(queue[0]);
+    // queue.shift();
 
+    // if(queue.length === 0) return
+    // levelOrderForEach(callback, queue[0], queue)
+
+
+    /* Iteration version */
+
+
+    while(queue.length > 0){
+        const node = queue[0];
+
+        if(node.left) queue.push(node.left);
+        if(node.right) queue.push(node.right);
+
+        callback(node)
+        queue.shift()
+    }
 }
 
 
