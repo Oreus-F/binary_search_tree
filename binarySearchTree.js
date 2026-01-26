@@ -180,10 +180,25 @@ function find(value, node){
 }
 
 
-function levelOrderForEach(callback){
+function levelOrderForEach(root, callback){
     if(callback === undefined){
-        throw new Error('A callback is required')
+        throw new Error('A root and a callback is required')
     }
+
+    const queue = new Array();
+    queue.push(root);
+
+    while(queue.length > 0){
+        const node = queue[0];
+
+        if(node.left) queue.push(node.left);
+        if(node.right) queue.push(node.right);
+
+        callback(node)
+        queue.shift()
+    }
+    
+
 }
 
 
@@ -191,8 +206,4 @@ let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 insert(5, tree.root);
 
 prettyPrint(tree.root)
-deleteItem(12, tree.root);
-console.log(find(75, tree.root))
-console.log(find(121, tree.root))
-levelOrderForEach()
-prettyPrint(tree.root)
+// levelOrderForEach(tree.root, console.log);
