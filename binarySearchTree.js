@@ -294,11 +294,22 @@ function distanceTo(depart, arrival, distance){
     return distance
 }
 
+
+function depth(value, root){
+    const node = find(value, root);
+    if(node === null) return node;
+
+    let depth = 0;
+
+    depth = distanceTo(root, node, depth)
+
+    return depth
+}
+
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 insert(5, tree.root);
 insert(4, tree.root);
 
 prettyPrint(tree.root);
 console.log(height(35, tree.root));
-
-
+console.log(depth(4, tree.root));
