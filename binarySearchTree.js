@@ -234,7 +234,7 @@ function preOrderForEach(callback, node = null){
 
     if(node === null) return
 
-    callback(node.value);
+    callback(node);
     preOrderForEach(callback, node.left);
     preOrderForEach(callback, node.right);
 }
@@ -249,15 +249,58 @@ function postOrderForEach(callback, node = null){
 
     postOrderForEach(callback, node.left);
     postOrderForEach(callback, node.right);
-    callback(node.value);
+    callback(node);
 }
 
 
-function height(){
-    
+function height(value, root){
+    const node = find(value, root);
+    if(node === null) return node;
+
+    let height = 0;
+    let arr = []
+
+    preOrderForEach((currentNode)=> {
+        if(isLeaf(currentNode)){arr.push(currentNode)}
+    }, tree.root);
+
+
+    arr.forEach((leaf)=> {
+        height = distanceTo(node, leaf, height)
+    });
+
+    console.log(arr)
+    console.log(height)
+
+
+
+}
+
+
+function isLeaf(node){
+    if(node.left === null && node.right === null) return true
+}
+
+
+function distanceTo(depart, arrival, distance){
+    let temp = depart;
+    let counter = 0;
+
+    while(temp.value !== arrival.value){
+        if(temp.value < arrival.value) temp = temp.right;
+        if(temp.value > arrival.value) temp = temp.left;
+        counter++;
+        if(counter > distance) distance = counter;
+    }
+
+    return distance
 }
 
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
-insert(5, tree.root);
+// insert(5, tree.root);
+// insert(4, tree.root)
 
-prettyPrint(tree.root)
+prettyPrint(tree.root);
+console.log(height(35, tree.root));
+
+
