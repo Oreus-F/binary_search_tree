@@ -123,16 +123,18 @@ function buildTree(array){
 
 
 function insert(value, node){
-    if (value === node.value) return
+    if (value === node.value) return node
 
     if(value < node.value){
         if(node.left === null){
-            return new Node(value);
+            node.left = new Node(value);
+            return node;
         }
         node.left = insert(value, node.left)
     } else {
         if(node.right === null){
-            return new Node(value);
+            node.right = new Node(value)
+            return node;
         }
         node.right = insert(value, node.right)
     }
@@ -269,11 +271,7 @@ function height(value, root){
         height = distanceTo(node, leaf, height)
     });
 
-    console.log(arr)
-    console.log(height)
-
-
-
+    return height
 }
 
 
@@ -297,8 +295,8 @@ function distanceTo(depart, arrival, distance){
 }
 
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
-// insert(5, tree.root);
-// insert(4, tree.root)
+insert(5, tree.root);
+insert(4, tree.root);
 
 prettyPrint(tree.root);
 console.log(height(35, tree.root));
