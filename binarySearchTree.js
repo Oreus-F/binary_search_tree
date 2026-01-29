@@ -260,16 +260,12 @@ function height(value, root){
     if(node === null) return node;
 
     let height = 0;
-    let arr = []
 
     preOrderForEach((currentNode)=> {
-        if(isLeaf(currentNode)){arr.push(currentNode)}
+        if(isLeaf(currentNode)){height = distanceTo(node, currentNode, height)}
     }, tree.root);
 
 
-    arr.forEach((leaf)=> {
-        height = distanceTo(node, leaf, height)
-    });
 
     return height
 }
