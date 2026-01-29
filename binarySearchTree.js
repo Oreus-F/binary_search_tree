@@ -280,6 +280,7 @@ function distanceTo(depart, arrival, distance){
     let temp = depart;
     let counter = 0;
 
+    
     while(temp.value !== arrival.value){
         if(temp.value < arrival.value) temp = temp.right;
         if(temp.value > arrival.value) temp = temp.left;
@@ -302,6 +303,30 @@ function depth(value, root){
     return depth
 }
 
+
+function isBalanced(root){
+    let result = true
+
+    preOrderForEach((curr) => {
+        // refiare function pour savoir la diff en hanteur des enfants pour insérer le callback
+        const left = curr.left;
+        const right = curr.right;
+
+        
+        const lHeigth = left === null ? 0 : height(left.value, root);
+        const rHeigth = right === null ? 0 : height(right.value, root);
+        const compare = lHeigth - rHeigth;
+
+        if(compare < -1 || compare > 1) {
+            result = false;
+            return result
+        }
+        
+    }, root);
+
+    return result 
+}
+
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 insert(5, tree.root);
 insert(4, tree.root);
@@ -309,3 +334,4 @@ insert(4, tree.root);
 prettyPrint(tree.root);
 console.log(height(35, tree.root));
 console.log(depth(4, tree.root));
+console.log(isBalanced(tree.root))
