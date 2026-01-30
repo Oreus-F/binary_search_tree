@@ -259,17 +259,34 @@ function height(value, root){
     const node = find(value, root);
     if(node === null) return node;
 
-    let height = 0;
 
-    preOrderForEach((currentNode)=> {
-        if(isLeaf(currentNode)){height = distanceTo(node, currentNode, height)}
-    }, tree.root);
+    /* PreOrderForEach iteration */
+    // let height = 0;
+
+    // preOrderForEach((currentNode)=> {
+    //     if(isLeaf(currentNode)){height = distanceTo(node, currentNode, height)}
+    // }, tree.root);
 
 
 
-    return height
+    // return height
+
+
+    /* recursion */
+
+    return heightRec(node)
 }
 
+
+function heightRec(node){
+    if(node === null) return -1;
+
+
+    let lHeigth = heightRec(node.left);
+    let rHeigth = heightRec(node.right);
+
+    return Math.max(lHeigth, rHeigth) + 1
+}
 
 function isLeaf(node){
     if(node.left === null && node.right === null) return true
