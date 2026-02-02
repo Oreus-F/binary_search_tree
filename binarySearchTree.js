@@ -333,7 +333,7 @@ function isBalancedRec(node){
 
     if(lHeigth === -1 || rHeigth === -1 || Math.abs(lHeigth - rHeigth) > 1) return -1
 
-    return Math.max(lHeigth - rHeigth) +1 
+    return Math.max(lHeigth, rHeigth) +1 
  
 }
 
