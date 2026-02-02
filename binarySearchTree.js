@@ -321,15 +321,29 @@ function depth(value, root){
 }
 
 function isBalanced(root){
+    return isBalancedRec(root) >= 0
+    
+}
 
+function isBalancedRec(node){
+    if(node === null) return 0
 
+    const lHeigth = isBalancedRec(node.left);
+    const rHeigth = isBalancedRec(node.right);
+
+    if(lHeigth === -1 || rHeigth === -1 || Math.abs(lHeigth - rHeigth) > 1) return -1
+
+    return Math.max(lHeigth - rHeigth) +1 
+ 
 }
 
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
-insert(5, tree.root);
-insert(4, tree.root);
+// let tree = buildTree(randomArray(20, 1, 100))
+insert(74, tree.root);
+// insert(73, tree.root);
+// insert(1, tree.root);
 
 prettyPrint(tree.root);
-console.log(height(35, tree.root));
-console.log(depth(4, tree.root));
-console.log(isBalanced(tree.root))
+// console.log(height(35, tree.root));
+// console.log(depth(4, tree.root));
+console.log(isBalanced(tree.root));
