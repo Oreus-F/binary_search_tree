@@ -7,7 +7,7 @@ class Node{
 }
 
 
-export class Tree{
+class Tree{
     constructor(root = null){
         this.root = root
     }
@@ -179,7 +179,6 @@ export class Tree{
 
     // depth by recursion
 
-
     isBalanced(root = this.root){
         return this.isBalancedRec(root) >= 0
     }
@@ -341,6 +340,8 @@ tree.insert(74);
 tree.insert(73);
 tree.deleteItem(75)
 tree.insert(1);
+
+console.log(tree.depth(65))
 
 tree = tree.rebalanced();
 tree.prettyPrint()
