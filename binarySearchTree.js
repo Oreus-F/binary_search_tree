@@ -337,13 +337,31 @@ function isBalancedRec(node){
  
 }
 
+
+function rebalanced(tree){
+    const root = tree.root
+    if(!isBalanced(root)){
+        let temp = [];
+
+        levelOrderForEach((node)=>{
+            temp.push(node.value)
+        }, root);
+
+        return tree = buildTree(temp)
+    } else {
+        return tree
+    }
+}
+
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
 // let tree = buildTree(randomArray(20, 1, 100))
 insert(74, tree.root);
-// insert(73, tree.root);
-// insert(1, tree.root);
+insert(73, tree.root);
+insert(1, tree.root);
 
 prettyPrint(tree.root);
 // console.log(height(35, tree.root));
 // console.log(depth(4, tree.root));
 console.log(isBalanced(tree.root));
+tree = rebalanced(tree);
+prettyPrint(tree.root)
