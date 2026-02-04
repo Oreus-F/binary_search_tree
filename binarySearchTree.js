@@ -324,36 +324,3 @@ function buildTree(array){
 
     return bsTree
 }
-
-
-function isLeaf(node){
-    if(node.left === null && node.right === null) return true
-}
-
-
-function distanceTo(depart, arrival, distance){
-    let temp = depart;
-    let counter = 0;
-
-    
-    while(temp.value !== arrival.value){
-        if(temp.value < arrival.value) temp = temp.right;
-        if(temp.value > arrival.value) temp = temp.left;
-        counter++;
-        if(counter > distance) distance = counter;
-    }
-
-    return distance
-}
-
-let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
-tree.prettyPrint()
-console.log(tree.depth(45))
-tree.insert(74);
-tree.insert(73);
-tree.deleteItem(75)
-tree.insert(1);
-
-
-tree = tree.rebalanced();
-tree.prettyPrint()
