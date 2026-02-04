@@ -160,7 +160,7 @@ class Tree{
 
     height(value){
         const node = this.find(value);
-        if(node === null) return node;
+        if(node === null) return undefined;
 
         return this.heightRec(node)
     }
