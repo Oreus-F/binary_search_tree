@@ -178,6 +178,28 @@ class Tree{
 
 
     // depth by recursion
+    depth(value){
+        if(this.find(value) === null) return undefined;
+
+        return this.depthRec(value);
+    }
+
+    
+    depthRec(value, node = this.root){
+        if(node === null) return
+        if(node.value === value) return 0
+
+        let lDepth = this.depthRec(value, node.left);
+        let rDepth = this.depthRec(value, node.right);
+
+
+        let result;
+
+        if(Number.isFinite(lDepth)) result = lDepth;
+        if(Number.isFinite(rDepth)) result = rDepth;
+
+        return result + 1
+    }
 
     isBalanced(root = this.root){
         return this.isBalancedRec(root) >= 0
@@ -215,12 +237,12 @@ function removeDuplicate(array){
 
 
 function mergeSort(array, start = 0, end = array.length - 1){
-    const mid = Math.floor((start + end)/2)
+    const mid = Math.floor((start + end)/2);
 
     if(start < end){
-        mergeSort(array, start, mid)
+        mergeSort(array, start, mid);
         mergeSort(array, mid + 1, end);
-        merge(array, start, mid, end)
+        merge(array, start, mid, end);
     }
 
     return array
@@ -255,6 +277,7 @@ function merge(array, start, mid, end){
     for(x = start; x <= end; x++){
         array[x] = temp[x - start]
     }
+
 }
 
 
@@ -323,25 +346,14 @@ function distanceTo(depart, arrival, distance){
     return distance
 }
 
-
-function depth(value, root){
-    const node = find(value, root);
-    if(node === null) return node;
-
-    let depth = 0;
-
-    depth = distanceTo(root, node, depth)
-
-    return depth
-}
-
 let tree = buildTree([4,6,12,45,85,25,12,35,65,75,42,15]);
+tree.prettyPrint()
+console.log(tree.depth(45))
 tree.insert(74);
 tree.insert(73);
 tree.deleteItem(75)
 tree.insert(1);
 
-console.log(tree.depth(65))
 
 tree = tree.rebalanced();
 tree.prettyPrint()
