@@ -222,7 +222,7 @@ class Tree{
             let temp = [];
 
             this.levelOrderForEach((node)=>{temp.push(node.value)});
-            return tree = buildTree(temp);
+            return buildTree(temp);
 
         } else {
             return tree
@@ -274,14 +274,14 @@ function merge(array, start, mid, end){
         right++
     }
 
-    for(x = start; x <= end; x++){
+    for(let x = start; x <= end; x++){
         array[x] = temp[x - start]
     }
 
 }
 
 
-function randomArray(length, min, max){
+export function randomArray(length, min, max){
     const array = []
     for(let x = 0; x <= length - 1; x++){
         const numb = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -315,7 +315,7 @@ function createBranches(array ,node, start = 0, end = array.length){
     return node
 }
 
-function buildTree(array){
+export function buildTree(array){
     array = removeDuplicate(array);
     array = mergeSort(array);
 
