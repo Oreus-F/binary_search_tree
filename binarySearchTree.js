@@ -217,16 +217,14 @@ class Tree{
 
     }
 
-    rebalanced(){
+    rebalanced(tree){
         if(!this.isBalanced()){
             let temp = [];
 
             this.levelOrderForEach((node)=>{temp.push(node.value)});
-            return buildTree(temp);
+            tree = buildTree(temp);
 
-        } else {
-            return tree
-        }
+        } 
     }
 }
 
